@@ -20,9 +20,9 @@ namespace :forever do
     main_js         = fetch(:main_js, "index.js")
     app_path        = fetch(:latest_release)
     node_env        = fetch(:node_env,'production')
-    forever_log     = fetch(:forever_log,'log/forever.log')
-    outfile         = fetch(:node_outfile,'log/server.log')
-    errfile         = fetch(:node_errfile,'log/error.log')
+    forever_log     = fetch(:forever_log,"#{app_path}/log/forever.log")
+    outfile         = fetch(:node_outfile,"#{app_path}/log/server.log")
+    errfile         = fetch(:node_errfile,"#{app_path}/log/error.log")
     if app_path.to_s.empty?
       raise error_type.new("Cannot detect current release path - make sure you have deployed at least once.")
     end
