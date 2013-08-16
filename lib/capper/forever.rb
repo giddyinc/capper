@@ -20,11 +20,13 @@ namespace :forever do
     main_js         = fetch(:main_js, "index.js")
     app_path        = fetch(:latest_release)
     node_env        = fetch(:node_env,'production')
+    outfile         = fetch(:node_outfile,'log/server.log')
+    errfile         = fetch(:node_errfile,'log/error.log')
     if app_path.to_s.empty?
       raise error_type.new("Cannot detect current release path - make sure you have deployed at least once.")
     end
     prefix  = fetch(:use_nave, false) ? "#{fetch(:nave_dir)}/nave.sh use #{fetch(:node_version, 'stable')}" :''
-    run "cd #{app_path} && NODE_ENV=#{node_env} #{prefix} #{forever_cmd} start #{main_js}"
+    run "cd #{app_path} && NODE_ENV=#{node_env} #{prefix} #{forever_cmd} -o #{outfile} -e #{errfile} start #{main_js}"
   end
 
   desc <<-DESC
