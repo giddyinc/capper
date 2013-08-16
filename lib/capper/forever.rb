@@ -27,7 +27,7 @@ namespace :forever do
       raise error_type.new("Cannot detect current release path - make sure you have deployed at least once.")
     end
     prefix  = fetch(:use_nave, false) ? "#{fetch(:nave_dir)}/nave.sh use #{fetch(:node_version, 'stable')}" :''
-    run "cd #{app_path} && NODE_ENV=#{node_env} #{prefix} #{forever_cmd} -l #{forever_log} -o #{outfile} -e #{errfile} start #{main_js}"
+    run "cd #{app_path} && NODE_ENV=#{node_env} #{prefix} #{forever_cmd} -l #{forever_log} -o #{outfile} -e #{errfile} -a start #{main_js}"
   end
 
   desc <<-DESC
